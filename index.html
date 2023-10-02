@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project - Countdown Timer</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: url("wallpaper.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.countdown-timer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(to right, rgba(85, 85, 85, 0.6), rgba(199, 199, 199, 0.2))
+}
+
+ul li {
+  display: inline-block;
+  padding: 0 5px;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+ul li span {
+  display: block;
+  font-size: 50px;
+  padding-top: 5px;
+  color: rgb(226, 206, 28);
+  font-weight: 600;
+}
+
+ul li span:nth-child(2) {
+  font-size: 20px;
+}
+
+.greet {
+  color: rgb(211, 211, 211);
+  font-size: 25px;
+  text-align: center;
+  font-family: sans-serif;
+  margin-top: 30px;
+}
+
+.coming-year {
+  font-size: 250px;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.493);
+}
+
+@media (max-width:768px) {
+  ul li span {
+    font-size: 10vw;
+  }
+
+  ul li span:nth-child(2) {
+    font-size: 15px;
+  }
+
+  .coming-year {
+    font-size: 40vw;
+    font-weight: 900;
+    }
+}
+</style>
+<body>
+    <div class="countdown-timer">
+        <h1 class="greet">Happy Birthday to Sujeet Kumar.Keep shining on. ☀😘🌺 </h1>
+        <ul>
+            <li>
+                <span class="days"></span>
+                <span>DAYS</span>
+            </li>
+            <li>
+                <span class="hours"></span>
+                <span>HOURS</span>
+            </li>
+            <li>
+                <span class="minutes"></span>
+                <span>MINUTES</span>
+            </li>
+            <li>
+                <span class="seconds"></span>
+                <span>SECONDS</span>
+            </li>
+        </ul>
+        <p class="coming-year"></p>
+    </div>
+    <script src="./script.js"></script>
+    <script>
+    const comingYear = document.querySelector(".coming-year");
+const birthDate = prompt("Enter birth date (1-31):");
+const birthMonth = prompt("Enter birth month (1-12):");
+const today = new Date();
+var nextYear;
+if (today.getMonth() + 1 > birthMonth || (today.getMonth() + 1 == birthMonth && today.getDate() + 1 > birthDate)) {
+  nextYear = new Date().getFullYear() + 1;
+}
+else {
+  nextYear = new Date().getFullYear();
+}
+comingYear.innerHTML = nextYear;
+function countdown() {
+  const remaining = new Date(`${nextYear}-${birthMonth}-${birthDate} 00:00:00`) - new Date();
+  const days = Math.floor(remaining / (1000 * 60 * 60 * 24));
+  const hours = Math.floor(remaining / (1000 * 60 * 60)) % 24;
+  const minutes = Math.floor(remaining / (1000 * 60)) % 60;
+  const seconds = Math.floor(remaining / 1000) % 60;
+  document.querySelector(".days").innerHTML = days;
+  document.querySelector(".hours").innerHTML = hours;
+  document.querySelector(".minutes").innerHTML = minutes;
+  document.querySelector(".seconds").innerHTML = seconds;
+}
+countdown()
+setInterval(countdown, 1000);
+</script>
+
+</body>
+</html>
